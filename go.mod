@@ -1,4 +1,4 @@
-module wen
+module github.com/fdxxw/go-wen
 
 go 1.14
 
