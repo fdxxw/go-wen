@@ -12,7 +12,7 @@ type Example struct {
 	Name string `csv:"name"`
 }
 
-func CsvWrite(path string, data []interface{}) error {
+func CsvWrite(path string, data interface{}) error {
 	dir := filepath.Dir(path)
 	if dir != "" {
 		err := os.MkdirAll(dir, os.ModePerm)
