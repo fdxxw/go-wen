@@ -1,6 +1,6 @@
 package wen
 
-type Map map[string]interface
+type Map map[string]interface{}
 
 func (m Map) M(s string) Map {
 	return m[s].(map[string]interface{})
