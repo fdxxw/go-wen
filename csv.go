@@ -38,6 +38,9 @@ func CsvRead(path string, i interface{}) error {
 }
 
 func CsvAppend(path string, data interface{}) error {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return CsvWrite(path, data)
+	}
 	f, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_APPEND, os.ModePerm)
 	if err != nil {
 		return err
