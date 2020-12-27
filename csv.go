@@ -8,7 +8,7 @@ import (
 )
 
 type Example struct {
-	Id   string `csv: "id"`
+	Id   string `csv:"id"`
 	Name string `csv:"name"`
 }
 
@@ -35,6 +35,15 @@ func CsvRead(path string, i interface{}) error {
 	}
 	defer f.Close()
 	return gocsv.UnmarshalFile(f, i)
+}
+
+func CsvAppend(path string, data interface{}) error {
+	f, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_APPEND, os.ModePerm)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return gocsv.MarshalWithoutHeaders(data, f)
 }
 
 // func CsvFind(path string, args map[string]string, r interface{}) error {
