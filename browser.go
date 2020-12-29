@@ -142,7 +142,7 @@ func ChromeApp(url, dir string, width, height int, customArgs ...string) error {
 	}
 	tmpDir := ""
 	if dir == "" {
-		name, err := ioutil.TempDir("", "topo")
+		name, err := ioutil.TempDir("", "go")
 		if err != nil {
 			return err
 		}
@@ -182,4 +182,8 @@ func ChromeApp(url, dir string, width, height int, customArgs ...string) error {
 		os.Exit(0)
 	}()
 	return nil
+}
+
+func ChromeAppMaximized(url, dir string) error {
+	return ChromeApp(url, dir, -1, -1, "--start-maximized")
 }
