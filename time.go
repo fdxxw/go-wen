@@ -5,7 +5,7 @@ import (
 )
 
 func Timestamp(t time.Time) int64 {
-	return t.Unix() * 1000
+	return t.UnixNano() / int64(time.Millisecond)
 }
 func TimeFormat(t time.Time, layout string) string {
 	return t.Local().Format(layout)
