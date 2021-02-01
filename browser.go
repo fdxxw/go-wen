@@ -172,7 +172,7 @@ func ChromeApp(url, dir string, width, height int, customArgs ...string) error {
 	go func() {
 		// Wait until the interrupt signal arrives or browser window is closed
 		sigc := make(chan os.Signal)
-		signal.Notify(sigc, os.Interrupt)
+		signal.Notify(sigc, os.Interrupt, os.Kill)
 		select {
 		case <-sigc:
 		case <-u.Done():
