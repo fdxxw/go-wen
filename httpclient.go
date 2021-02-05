@@ -9,6 +9,10 @@ import (
 
 var HttpClient *http.Client
 
+func init() {
+	HttpClient = &http.Client{}
+}
+
 func HttpGet(url string, params map[string]string, headers map[string]string) (*http.Response, error) {
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
