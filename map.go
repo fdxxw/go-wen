@@ -15,9 +15,15 @@ func (m Map) S(s string) string {
 func (m Map) Int(s string) int {
 	return m[s].(int)
 }
-
+func (m Map) Bool(s string) bool {
+	return m[s].(bool)
+}
 func (m Map) I(s string) interface{} {
 	return m[s]
+}
+func (m Map) Have(s string) bool {
+	_, ok := m[s]
+	return ok
 }
 
 func (m Map) Get(s string) interface{} {
