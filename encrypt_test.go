@@ -19,3 +19,8 @@ func TestEncryptAES(t *testing.T) {
 	d := EncryptAES(password, bytes)
 	println(string(DecryptAES(d, bytes)))
 }
+
+func TestBcryptCompare(t *testing.T) {
+	Bcrypt("1qaz@WSX")
+	BcryptCompare("$2a$10$mP01Fk0gbMqCPipoFF7WX.IWcbwljKrs11KA2Von008JDjdafO4ea", "1qaz@WSX")
+}

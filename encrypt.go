@@ -15,6 +15,8 @@ import (
 	"encoding/hex"
 	"errors"
 	"io"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 type SignType string
@@ -288,4 +290,26 @@ func VerifyRSA(message, publicKey, sign string, signType SignType) error {
 		return err
 	}
 	return nil
+}
+
+// bcrypt 加密
+func Bcrypt(plainPwd string) (hashedPwd string, err error) {
+	pwd := []byte(plainPwd)
+	hash, err := bcrypt.GenerateFromPassword(pwd, bcrypt.MinCost)
+	if err != nil {
+		return
+	}
+	hashedPwd = string(hash)
+	return
+}
+
+// bcrypt 验证密码
+func BcryptCompare(hashedPwd string, plainPwd string) bool {
+	byteHash := []byte(hashedPwd)
+	bytePwd := []byte(plainPwd)
+	err := bcrypt.CompareHashAndPassword(byteHash, bytePwd)
+	if err != nil {
+		return false
+	}
+	return true
 }
