@@ -2,6 +2,7 @@ package wen
 
 import (
 	"fmt"
+	"log"
 	"testing"
 )
 
@@ -17,5 +18,14 @@ func TestDirExists(t *testing.T) {
 		fmt.Println("exists")
 	} else {
 		fmt.Println("does not exist")
+	}
+}
+
+func TestCopyFile(t *testing.T) {
+	from := "fs.go"
+	to := "C:/Users/fd/Downloads/fs.go"
+	err := CopyFile(from, to)
+	if err != nil {
+		log.Fatal(err)
 	}
 }
