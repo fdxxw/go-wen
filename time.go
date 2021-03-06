@@ -1,6 +1,7 @@
 package wen
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -21,4 +22,14 @@ func TimeFormatDate(t time.Time) string {
 func TimeParse(timeString, layout string) time.Time {
 	t, _ := time.ParseInLocation(layout, timeString, time.Local)
 	return t
+}
+
+// 统计耗时
+// defer wen.TimeCost()()
+func TimeCost() func() {
+	start := time.Now()
+	return func() {
+		tc := time.Since(start)
+		fmt.Printf("time cost = %v\n", tc)
+	}
 }
