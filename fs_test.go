@@ -29,3 +29,11 @@ func TestCopyFile(t *testing.T) {
 		log.Fatal(err)
 	}
 }
+
+func TestFileTemp(t *testing.T) {
+	f, err := FileTemp()
+	if err != nil {
+		t.Error(err)
+	}
+	f.Close()
+}

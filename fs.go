@@ -2,6 +2,7 @@ package wen
 
 import (
 	"io"
+	"io/ioutil"
 	"os"
 )
 
@@ -35,4 +36,8 @@ func CopyFile(from, to string) error {
 	defer dest.Close()
 	_, err = io.Copy(dest, source)
 	return err
+}
+
+func FileTemp() (*os.File, error) {
+	return ioutil.TempFile(os.TempDir(), "*")
 }
