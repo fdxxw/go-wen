@@ -56,3 +56,21 @@ func (m Map) Get(s string) interface{} {
 	}
 	return nil
 }
+func (m Map) Set(s string, v interface{}) {
+	splits := strings.Split(s, ".")
+	if len(splits) == 1 {
+		m[s] = v
+		return
+	}
+	var r = m
+	for index, split := range splits {
+		if index == len(splits)-1 {
+			r.Set(split, v)
+		} else {
+			if !r.Have(split) {
+				r.Set(split, make(map[string]interface{}))
+			}
+			r = r.M(split)
+		}
+	}
+}
