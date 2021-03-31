@@ -2,13 +2,13 @@ package wen
 
 import "strings"
 
-type Map map[string]interface{}
+type Map map[interface{}]interface{}
 
 func (m Map) M(s string) Map {
 	if !m.Have(s) {
 		return nil
 	}
-	return m[s].(map[string]interface{})
+	return m[s].(map[interface{}]interface{})
 }
 
 func (m Map) S(s string) string {
@@ -68,7 +68,7 @@ func (m Map) Set(s string, v interface{}) {
 			r.Set(split, v)
 		} else {
 			if !r.Have(split) {
-				r.Set(split, make(map[string]interface{}))
+				r.Set(split, make(map[interface{}]interface{}))
 			}
 			r = r.M(split)
 		}
