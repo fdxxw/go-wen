@@ -2,7 +2,7 @@ package wen
 
 import "strings"
 
-type Map map[interface{}]interface{}
+type Map map[string]interface{}
 
 func (m Map) M(s string) Map {
 	if !m.Have(s) {
