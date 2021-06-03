@@ -1,6 +1,7 @@
 package wen
 
 import (
+	"log"
 	"strconv"
 	"time"
 
@@ -8,11 +9,12 @@ import (
 )
 
 var flake = sonyflake.NewSonyflake(sonyflake.Settings{
-	StartTime: time.Now(),
+	StartTime: time.Date(2021, time.June, 1, 0, 0, 0, 0, time.Local),
 })
 
 func ID() string {
 	i, _ := flake.NextID()
+	log.Println(i)
 	return TenToAny(i, 62)
 }
 

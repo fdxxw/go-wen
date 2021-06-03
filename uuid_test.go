@@ -6,7 +6,7 @@ import (
 )
 
 func TestID(t *testing.T) {
-	for i := 0; i < 1*100; i++ {
+	for i := 0; i < 1; i++ {
 		log.Println(ID())
 	}
 }
