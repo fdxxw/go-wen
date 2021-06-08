@@ -8,7 +8,7 @@ func (m Map) M(s string) Map {
 	if !m.Have(s) {
 		return nil
 	}
-	return m[s].(Map)
+	return m[s].(map[string]interface{})
 }
 
 func (m Map) S(s string) string {
