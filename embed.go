@@ -7,15 +7,14 @@ import (
 	"net/http"
 )
 
-// 根文件夹路径
-var rootUrl string
-
 type RootFileSystem interface {
 	Open(name string) (http.File, error)
 }
 
 type ioFS struct {
-	fsys fs.FS
+	// 根文件夹路径
+	rootUrl string
+	fsys    fs.FS
 }
 
 type ioFile struct {
@@ -66,9 +65,9 @@ func (f ioFile) Readdir(count int) ([]fs.FileInfo, error) {
 func (f ioFS) Open(name string) (http.File, error) {
 	// 拼接根文件夹前缀
 	if name == "/" {
-		name = rootUrl
+		name = f.rootUrl
 	} else {
-		name = rootUrl + name
+		name = f.rootUrl + name
 	}
 	file, err := f.fsys.Open(name)
 	if err != nil {
@@ -79,6 +78,5 @@ func (f ioFS) Open(name string) (http.File, error) {
 
 // 拼接指定路径的文件系统，在请求时可省略指定url
 func RootFs(fsys fs.FS, url string) RootFileSystem {
-	rootUrl = url
-	return ioFS{fsys}
+	return ioFS{rootUrl: url, fsys: fsys}
 }
